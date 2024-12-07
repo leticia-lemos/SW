@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "titulo": "Lançamento do Game X",
+    "conteudo": "O Game X será lançado na próxima semana com gráficos impressionantes e jogabilidade inovadora.",
+    "data": "2024-12-01"
+  },
+  {
+    "id": 2,
+    "titulo": "Atualização no Jogo Y",
+    "conteudo": "O Jogo Y recebeu uma nova atualização que adiciona um mapa exclusivo.",
+    "data": "2024-12-05"
+  }
+]

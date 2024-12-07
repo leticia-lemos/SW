@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .news-container {
+            padding: 20px;
+        }
+
+        .news {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .news h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Game News</h1>
+    </header>
+    <div class="news-container">
+        <% noticias.forEach((noticia)=> { %>
+            <div class="news">
+                <h2>
+                    <%= noticia.titulo %>
+                </h2>
+                <p>
+                    <%= noticia.conteudo %>
+                </p>
+                <small>
+                    <%= noticia.data %>
+                </small>
+            </div>
+            <% }); %>
+    </div>
+</body>
+
+</html>
