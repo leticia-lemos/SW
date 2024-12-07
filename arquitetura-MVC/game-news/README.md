@@ -5,9 +5,8 @@ Este projeto foi desenvolvido para exibir notícias utilizando a arquitetura MVC
 ## Links:
 
 - [Repositório no GitHub](https://github.com/leticia-lemos/SW/tree/main/arquitetura-MVC/game-news)
-- [Acesse o site aqui]()
+- [Iniciar o projeto](node app.js)
 
 ## Funcionalidades:
-
 - Exibição de notícias.
 - Modais para mostrar detalhes das notícias.
