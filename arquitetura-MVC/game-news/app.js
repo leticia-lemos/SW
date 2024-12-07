@@ -1,13 +1,18 @@
 const express = require('express');
-const newsRoutes = require('./src/routes/news');
-const path = require('path');
+const noticiasRoutes = require('./src/routes/news');
 const app = express();
-const PORT = 5500;
 
+// Defina o motor de visualização (EJS)
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src', 'views', 'news'));
 
+// Aponte para o diretório correto das views (src/views)
+app.set('views', './src/views');  
+
+// Middleware estático (se necessário para arquivos como imagens, CSS)
 app.use(express.static('public'));
-app.use('/', newsRoutes);
 
-app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));
+// Rota principal
+app.use('/', noticiasRoutes);
+
+// Inicia o servidor na porta 5500
+app.listen(5500, () => console.log(`Servidor rodando em http://localhost:5500`));

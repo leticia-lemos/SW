@@ -1,62 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <title>Game News</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: "Poppins";
+            background-color: #f8f8ff;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background: #333;
-            color: #fff;
-            padding: 10px 20px;
+            background: #121212;
+            color: #f8f8ff;
+            padding: 20px 0;
             text-align: center;
+            font-size: 20px;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .news-container {
-            padding: 20px;
+            width: 90%;
+            margin: 30px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
         }
 
         .news {
-            background: #fff;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #f8f8ff;
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .news:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .news h2 {
-            margin: 0;
+            font-size: 20px;
+            color: #121212;
+            margin-bottom: 10px;
+        }
+
+        .news p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .news small {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .news img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: scroll;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 0 auto;
+            padding: 35px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+
+        .modal-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #modalImage {
+            width: 550px;
+        }
+
+        @media (max-width: 768px) {
+            .news-container {
+                justify-content: center;
+            }
+
+            .news {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 665px) {
+            #modalImage {
+                width: 430px;
+            }
+        }
+
+        @media (max-width: 510px) {
+            #modalImage {
+                width: 400px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            #modalImage {
+                width: 350px;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Game News</h1>
+        <h1>Últimas notícias</h1>
     </header>
     <div class="news-container">
-        <% noticias.forEach((noticia)=> { %>
-            <div class="news">
-                <h2>
-                    <%= noticia.titulo %>
-                </h2>
-                <p>
-                    <%= noticia.conteudo %>
-                </p>
-                <small>
-                    <%= noticia.data %>
-                </small>
-            </div>
-            <% }); %>
+        <!-- Exemplo para 6 itens de notícia -->
+        <div class="news" onclick="openModal(1)">
+            <img src="/images/the-last-of-us-part-ii-.webp" alt="The Last of Us: Part II">
+            <h2>The Last of Us: Part II</h2>
+            <p>The Last Of Us: Part II se mostrou um sucesso em nível mundial...</p>
+            <small>26-12-2020</small>
+        </div>
+        <div class="news" onclick="openModal(2)">
+            <img src="/images/hades-wallpaper-01.webp" alt="Hades">
+            <h2>Hades</h2>
+            <p>O título da Supergiant Games, disponível para macOS, PC e Nintendo Switch...</p>
+            <small>26-12-2020</small>
+        </div>
+        <div class="news" onclick="openModal(3)">
+            <img src="/images/cod-wz.webp" alt="Call of Duty: Warzone Caldera">
+            <h2>Call of Duty: Warzone Caldera</h2>
+            <p>O Battle Royale gratuito da Activision é outro colecionador de números...</p>
+            <small>26-12-2020</small>
+        </div>
+        <div class="news" onclick="openModal(4)">
+            <img src="/images/doomEternal.jpeg" alt="Doom Eternal">
+            <h2>Doom Eternal</h2>
+            <p>A série “Doom” é um das mais clássicas da história dos games...</p>
+            <small>17-01-2020</small>
+        </div>
+        <div class="news" onclick="openModal(5)">
+            <img src="/images/res3.avif" alt="Resident Evil 3">
+            <h2>Resident Evil 3</h2>
+            <p>Nos últimos tempos, a Capcom tem apostado no relançamento de jogos consagrados com gráficos mais
+                desenvolvidos...</p>
+            <small>17-01-2020</small>
+        </div>
+        <div class="news" onclick="openModal(6)">
+            <img src="/images/cyberpunk.jpeg" alt="Cyberpunk 2077">
+            <h2>Cyberpunk 2077</h2>
+            <p>Título mais esperado de 2020 pelo repórter Dave Klein, da “Game Spot”, “Cyberpunk 2077”...</p>
+            <small>17-01-2020</small>
+        </div>
     </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-column">
+                <h2 id="modalTitle"></h2>
+                <img id="modalImage" src="" alt="" style="border-radius: 8px; margin-bottom: 15px;">
+                <p id="modalContent"></p>
+                <small id="modalDate"></small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const noticias = [
+            {
+                "id": 1,
+                "image": "/images/the-last-of-us-part-ii-.webp",
+                "titulo": "The Last of Us: Part II",
+                "conteudo": "The Last Of Us: Part II se mostrou um sucesso em nível mundial. Durante a sua primeira semana de lançamento, o jogo vendeu mais de quatro milhões de cópias. O êxito do game acabou rendendo memes, além de inúmeras reviews, pela Internet, angariando uma nota alta no site de crítica especializada Metacritic.",
+                "data": "26-12-2020"
+            },
+            {
+                "id": 2,
+                "image": "/images/hades-wallpaper-01.webp",
+                "titulo": "Hades",
+                "conteudo": "O título da Supergiant Games, disponível para macOS, PC e Nintendo Switch, teve um lançamento discreto, mas rapidamente se tornou um dos nomes mais notórios deste ano. Atualmente, o game é um dos mais bem avaliados de 2020 no site Metacritic, e foi sucesso de indicações no The Game Awards 2020. Ao todo Hades disputou oito categorias, incluindo o 'Jogo do Ano'. No fim, conquistou os prêmios de 'Melhor Jogo de Ação' e 'Melhor Jogo Independente'. Já no Brazil Game Awards 2020, além de ganhar novamente na categoria melhor jogo indie, o título saiu vitorioso na disputa pelo 'Melhor Jogo Original'.",
+                "data": "26-12-2020"
+            },
+            {
+                "id": 3,
+                "image": "/images/cod-wz.webp",
+                "titulo": "Call of Duty: Warzone Caldera",
+                "conteudo": "O Battle Royale gratuito da Activision é outro colecionador de números neste 2020. Nas suas primeiras 24 horas, o jogo bateu seis milhões de players. Posteriormente, em quatro dias, o game reuniu 15 milhões de jogadores ao redor do globo. No décimo dia após o lançamento, conseguiu alcançar 30 milhões de usuários. As conquistas, no entanto, não ficaram restritas apenas aos primeiros momentos do game. Recentemente, Call of Duty: Warzone ultrapassou 75 milhões de players. O jogo, que pode ser baixado no PC, PS4 e Xbox One, foi indicado para as categorias 'Melhor Jogo Contínuo' e 'Melhor Multiplayer' no The Game Awards 2020.",
+                "data": "26-12-2020"
+            },
+            {
+                "id": 4,
+                "image": "/images/doomEternal.jpeg",
+                "titulo": "Doom Eternal",
+                "conteudo": "A série “Doom” é um das mais clássicas da história dos games - sua primeira versão foi lançada em 1993. A sequência “Doom Eternal” foi revelada na E3 de 2018 e recebeu cenas de gameplay nas Quakecon de 2018 e 2019 e na E3 de 2019. Erik Kain, repórter da FORBES, declarou que o jogo está com ótimos gráficos e criando altas expectativas. O continuação mantém a fórmula do sucesso: um personagem em primeira pessoa usando armas futuristas para lutar contra a invasão de demônios e criaturas assustadoras. Dessa vez, o local escolhido foi o planeta Terra, mas outros lugares também serão visitados, como cenários do jogo original, para gerar a nostalgia esperada pelos fãs da série.",
+                "data": "17-01-2020"
+            },
+            {
+                "id": 5,
+                "image": "/images/res3.avif",
+                "titulo": "Resident Evil 3",
+                "conteudo": "Nos últimos tempos, a Capcom tem apostado no relançamento de jogos consagrados com gráficos mais desenvolvidos. Essa é a fórmula usada em “Resident Evil 3: Remake” que, em um trailer divulgado na terça-feira (14), revelou a volta de um dos personagens mais icônicos da série: Nemesis. Assista aqui o vídeo. A receita de sucesso não mudou – a história e os personagens retornam, com uma jogabilidade melhorada e mais familiar para os jogadores atuais. Algumas mudanças de aparência já foram anunciadas, mas o título deve cumprir o prometido: uma experiência nostálgica. “Resident Evil 3: Remake” foi anunciado no final de 2019.",
+                "data": "17-01-2020"
+            },
+            {
+                "id": 6,
+                "image": "/images/cyberpunk.jpeg",
+                "titulo": "Cyberpunk 2077",
+                "conteudo": "Título mais esperado de 2020 pelo repórter Dave Klein, da “Game Spot”, “Cyberpunk 2077” se junta a “Marvel’s Avengers” como os jogos desta lista que não consistem em uma continuação ou remake. O site da IGN Brasil também incluiu o título na lista dos 30 games mais importantes deste ano. Um dos pontos favoráveis para essa previsão é o fato de que a CD Projekt Red é a desenvolvedora e publicadora do título, a mesma empresa responsável por produzir “The Witcher III – Wild Hunt”, que foi escolhido o jogo do ano de 2015 na premiação The Game Awards. Mas as comparações entre os títulos podem parar por aí, já que “Cyberpunk 2077” se passa em um mundo futurista e a jogabilidade se dá em primeira pessoa.",
+                "data": "17-01-2020"
+            }
+        ];
+
+        function openModal(id) {
+            const noticia = noticias.find(n => n.id === id);
+            document.getElementById("modalTitle").innerText = noticia.titulo;
+            document.getElementById("modalImage").src = noticia.image;
+            document.getElementById("modalContent").innerText = noticia.conteudo;
+            document.getElementById("modalDate").innerText = noticia.data;
+
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target === document.getElementById("myModal")) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 
 </html>
